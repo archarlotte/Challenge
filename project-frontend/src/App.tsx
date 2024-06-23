@@ -22,8 +22,9 @@ const App: React.FC = () => {
   }, []);
 
   const createIssue = () => {
-    const newIssue: Issue = { id: issues.length + 1, title, description };
+    const newIssue = { title, description };
     axios.post(API_URL, newIssue).then(response => {
+      console.log(response.data);
       setIssues([...issues, response.data]);
       setTitle('');
       setDescription('');
@@ -31,7 +32,6 @@ const App: React.FC = () => {
   };
 
   const readIssue = (id: number) => {
-    console.log(`${API_URL}/${id}`);
     axios.get(`${API_URL}/${id}`).then(response => console.log(response.data));
   }
 
@@ -61,7 +61,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Issue Tracker</h1>
+      <h1>Issues</h1>
       <input
         type="text"
         placeholder="Title"
